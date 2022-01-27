@@ -1,0 +1,17 @@
+server:
+  port: 8084
+
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/lottery_service?serverTimezone=Asia/Seoul&characterEncoding=UTF-8
+    username: koko
+    password: koko123
+
+  jpa:
+    database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
+    open-in-view: true
+    show-sql: true
+    hibernate:
+      format_sql: true
+      ddl-auto: create
