@@ -26,6 +26,7 @@ dependencies {
 	implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
 	developmentOnly("org.springframework.boot:spring-boot-devtools")
 	implementation("mysql:mysql-connector-java")
+	implementation("org.jsoup:jsoup:1.14.3")
 	implementation("org.jetbrains.kotlin:kotlin-allopen:1.6.10")
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
 }

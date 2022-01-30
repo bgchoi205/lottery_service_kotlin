@@ -1,21 +1,26 @@
 package com.choi.lottery_service.api
 
+import com.choi.lottery_service.dto.LotteryInfoDto
 import com.choi.lottery_service.service.LotteryServiceImpl
+import com.fasterxml.jackson.databind.util.JSONPObject
+import org.jsoup.Jsoup
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.RestController
-import java.net.URL
 
 @RestController
 class LotteryController(private val lotteryService: LotteryServiceImpl) {
 
     @GetMapping
     fun showIndex():String{
-        return "Lottery Service!!"
+        val round = lotteryService.getLastRound()
+
+        return "회차 : $round"
     }
 
+    // 회차 입력에 따라 당첨 정보 가져오기
     @GetMapping("/{round}")
-    fun getWinningNumber(@PathVariable round: Int): String{
+    fun getWinningNumber(@PathVariable round: Int): LotteryInfoDto{
 
         return lotteryService.getLotteryInfoByRound(round)
     }
