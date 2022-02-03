@@ -33,16 +33,8 @@ class LotteryServiceImpl(private val lotteryRepository: IssuedLotteryRepository)
 
         var wonLotteryTickets = mutableListOf<IssuedLottery>()
 
-        findLotteryTickets.forEach {
-            if(it.getNum1() == wonLotteryInfo.drwtNo1
-                && it.getNum2() == wonLotteryInfo.drwtNo2
-                && it.getNum3() == wonLotteryInfo.drwtNo3
-                && it.getNum4() == wonLotteryInfo.drwtNo4
-                && it.getNum5() == wonLotteryInfo.drwtNo5
-                && it.getNum6() == wonLotteryInfo.drwtNo6){
-                wonLotteryTickets.add(it)
-            }
-        }
+        // 로직 변경예정
+
         return wonLotteryTickets
     }
 

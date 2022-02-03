@@ -49,27 +49,6 @@ class lotteryTest_service() {
         val num6 = 42
         val now = LocalDateTime.now()
 
-
-
-        for(i:Int in 0..4){
-            val lottery = IssuedLottery(
-                i+1.toLong(),
-                1000,
-                now,
-                num1 + i,
-                num2 + i,
-                num3 + i,
-                num4 + i,
-                num5 + i,
-                num6 + i,
-            )
-            lotteryService.save(lottery)
-        }
-
-
-        val findWonLottery = lotteryService.getWonLotteryInfo(1000)
-
-        Assertions.assertTrue(findWonLottery.size == 1)
     }
 
 }

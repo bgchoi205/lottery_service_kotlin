@@ -8,55 +8,30 @@ import javax.persistence.*
 class IssuedLottery(
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private val id: Long,
-    private val drwNo: Int,
-    private val issuedDate: LocalDateTime,
+    val id: Long,
+    val drwNo: Int,
+    val issuedDate: LocalDateTime,
 
-//    @ElementCollection
-//    private val lotteryNumbers: Collection<LotterySaveDto>
+    @ElementCollection
+    val lotteryNumbers1: Collection<Int>,
 
-    private val num1: Int,
-    private val num2: Int,
-    private val num3: Int,
-    private val num4: Int,
-    private val num5: Int,
-    private val num6: Int
+    @ElementCollection
+    val lotteryNumbers2: Collection<Int>,
 
-){
+    @ElementCollection
+    val lotteryNumbers3: Collection<Int>,
 
-    fun getId(): Long {
-        return this.id
-    }
+    @ElementCollection
+    val lotteryNumbers4: Collection<Int>,
 
-    fun getDrwNo(): Int{
-        return this.drwNo
-    }
+    @ElementCollection
+    val lotteryNumbers5: Collection<Int>
 
-    fun getNum1(): Int{
-        return this.num1
-    }
+//    val num1: Int,
+//    val num2: Int,
+//    val num3: Int,
+//    val num4: Int,
+//    val num5: Int,
+//    val num6: Int
 
-    fun getNum2(): Int{
-        return this.num2
-    }
-
-    fun getNum3(): Int{
-        return this.num3
-    }
-
-    fun getNum4(): Int{
-        return this.num4
-    }
-
-    fun getNum5(): Int{
-        return this.num5
-    }
-
-    fun getNum6(): Int{
-        return this.num6
-    }
-
-//    fun getLotteryNumbers(): Collection<LotterySaveDto>{
-//        return this.lotteryNumbers
-//    }
-}
+)

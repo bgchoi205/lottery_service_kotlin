@@ -1,13 +1,10 @@
 package com.choi.lottery_service.dto
 
-import javax.persistence.Embeddable
-
-@Embeddable
 data class LotterySaveDto(
-    val num1: Int,
-    val num2: Int,
-    val num3: Int,
-    val num4: Int,
-    val num5: Int,
-    val num6: Int
+    val nums1: Collection<Int>,
+    val nums2: Collection<Int>?,
+    val nums3: Collection<Int>?,
+    val nums4: Collection<Int>?,
+    val nums5: Collection<Int>?,
+    val nums6: Collection<Int>?
 )

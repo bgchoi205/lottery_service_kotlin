@@ -1,5 +1,5 @@
 package com.choi.lottery_service.global.response
 
-data class ResDto(
+data class RespDto(
     var data: Any
 )
