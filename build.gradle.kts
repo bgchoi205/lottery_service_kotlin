@@ -38,7 +38,7 @@ dependencies {
 	implementation("mysql:mysql-connector-java")
 	implementation("org.jsoup:jsoup:1.14.3")
 	implementation("org.jetbrains.kotlin:kotlin-allopen:1.6.10")
-	testImplementation("org.springframework.boot:spring-boot-starter-test")
+	implementation("org.springframework.boot:spring-boot-starter-test")
 }
 
 tasks.withType<KotlinCompile> {

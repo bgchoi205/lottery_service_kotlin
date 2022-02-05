@@ -23,13 +23,14 @@ class LotteryController(private val lotteryService: LotteryServiceImpl) {
         return RespDto(lotteryService.getLotteryInfoByRound(round))
     }
 
-    // 해당 회차 당첨번호 가져오기
-    @GetMapping("/won/{round}")
-    fun getWonLotteryTickets(@PathVariable round: Int): RespDto{
 
-        return RespDto(
-            lotteryService.getWonLotteryInfo(round)
-        )
-    }
+    // 해당 회차 당첨번호 가져오기
+//    @GetMapping("/won/{round}")
+//    fun getWonLotteryTickets(@PathVariable round: Int): RespDto{
+//
+//        return RespDto(
+//            lotteryService.getWonLotteryInfo(round)
+//        )
+//    }
 
 }

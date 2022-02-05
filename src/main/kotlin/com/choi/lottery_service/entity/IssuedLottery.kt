@@ -16,16 +16,16 @@ class IssuedLottery(
     val lotteryNumbers1: Collection<Int>,
 
     @ElementCollection
-    val lotteryNumbers2: Collection<Int>,
+    val lotteryNumbers2: Collection<Int>?,
 
     @ElementCollection
-    val lotteryNumbers3: Collection<Int>,
+    val lotteryNumbers3: Collection<Int>?,
 
     @ElementCollection
-    val lotteryNumbers4: Collection<Int>,
+    val lotteryNumbers4: Collection<Int>?,
 
     @ElementCollection
-    val lotteryNumbers5: Collection<Int>
+    val lotteryNumbers5: Collection<Int>?
 
 //    val num1: Int,
 //    val num2: Int,
