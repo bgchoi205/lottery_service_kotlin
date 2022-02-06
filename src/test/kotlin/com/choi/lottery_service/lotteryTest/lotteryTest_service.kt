@@ -1,7 +1,6 @@
 package com.choi.lottery_service.lotteryTest
 
 import com.choi.lottery_service.dto.LotterySaveDto
-import com.choi.lottery_service.entity.IssuedLottery
 import com.choi.lottery_service.service.LotteryServiceImpl
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
@@ -25,10 +24,7 @@ class lotteryTest_service() {
 
         val now = LocalDateTime.now()
 
-        val lottery = IssuedLottery(
-            1L,
-            1000,
-            now,
+        val lotterySaveDto = LotterySaveDto(
             numbers1,
             numbers2,
             numbers3,
@@ -36,27 +32,39 @@ class lotteryTest_service() {
             null
         )
 
-        lotteryService.save(lottery)
+        lotteryService.save(lotterySaveDto)
 
         val findLottery = lotteryService.findById(1L)
 
 //        org.assertj.core.api.Assertions.assertThat(lottery.id == findLottery.id)
 
-        Assertions.assertTrue(lottery.id == findLottery.id)
+        Assertions.assertTrue(findLottery.id == 1L)
 
     }
 
-//    @Test
-//    @Transactional
-//    fun getWonLotteryTest(){
-//        val num1 = 2
-//        val num2 = 8
-//        val num3 = 19
-//        val num4 = 22
-//        val num5 = 32
-//        val num6 = 42
-//        val now = LocalDateTime.now()
-//
-//    }
+    @Test
+    fun getWonLotteryTest(){
+
+        val numbers1:Collection<Int> = listOf(2, 8, 19, 22, 32, 42) // 1등
+        val numbers2:Collection<Int> = listOf(2, 8, 19, 22, 39, 42) // 2등
+        val numbers3:Collection<Int> = listOf(2, 8, 11, 25, 32, 42) // 4등
+        val numbers4:Collection<Int> = listOf(1, 5, 15, 26, 32, 42) // 낙첨
+
+        val lotterySaveDto = LotterySaveDto(
+            numbers1,
+            numbers2,
+            numbers3,
+            numbers4,
+            null
+        )
+
+        lotteryService.save(lotterySaveDto)
+
+        val wonLotteryInfos = lotteryService.getWonLotteryInfo(1000)
+
+        if (wonLotteryInfos != null) {
+            org.assertj.core.api.Assertions.assertThat(wonLotteryInfos.size)
+        }
+    }
 
 }

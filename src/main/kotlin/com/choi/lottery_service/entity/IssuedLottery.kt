@@ -7,8 +7,8 @@ import javax.persistence.*
 @Entity
 class IssuedLottery(
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    val id: Long,
+    @GeneratedValue
+    var id: Long? = null,
     val drwNo: Int,
     val issuedDate: LocalDateTime,
 

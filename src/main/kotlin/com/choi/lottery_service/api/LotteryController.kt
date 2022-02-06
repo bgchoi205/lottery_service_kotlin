@@ -1,10 +1,9 @@
 package com.choi.lottery_service.api
 
+import com.choi.lottery_service.dto.LotterySaveDto
 import com.choi.lottery_service.global.response.RespDto
 import com.choi.lottery_service.service.LotteryServiceImpl
-import org.springframework.web.bind.annotation.GetMapping
-import org.springframework.web.bind.annotation.PathVariable
-import org.springframework.web.bind.annotation.RestController
+import org.springframework.web.bind.annotation.*
 
 @RestController
 class LotteryController(private val lotteryService: LotteryServiceImpl) {
@@ -13,24 +12,30 @@ class LotteryController(private val lotteryService: LotteryServiceImpl) {
     fun showIndex():String{
         val round = lotteryService.getLastRound()
 
-        return "회차 : $round"
+        return "최신 회차 : $round"
     }
 
-    // 회차 입력에 따라 당첨 정보 가져오기
+    // 회차 입력에 따라 당첨 번호 가져오기
     @GetMapping("/{round}")
     fun getWinningNumber(@PathVariable round: Int): RespDto{
 
         return RespDto(lotteryService.getLotteryInfoByRound(round))
     }
 
+    @PostMapping
+    fun saveLottery(@RequestBody lotterySaveDto: LotterySaveDto){
+        lotteryService.save(lotterySaveDto)
+    }
 
-    // 해당 회차 당첨번호 가져오기
-//    @GetMapping("/won/{round}")
-//    fun getWonLotteryTickets(@PathVariable round: Int): RespDto{
-//
-//        return RespDto(
-//            lotteryService.getWonLotteryInfo(round)
-//        )
-//    }
+    // 저장된 복권 중 해당 회차 당첨된 번호들 가져오기
+    @GetMapping("/won/{round}")
+    fun getWonLotteryTickets(@PathVariable round: Int): RespDto? {
+
+        return lotteryService.getWonLotteryInfo(round)?.let {
+            RespDto(
+                it
+            )
+        }
+    }
 
 }

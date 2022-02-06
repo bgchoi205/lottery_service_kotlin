@@ -5,6 +5,5 @@ data class LotterySaveDto(
     val nums2: Collection<Int>?,
     val nums3: Collection<Int>?,
     val nums4: Collection<Int>?,
-    val nums5: Collection<Int>?,
-    val nums6: Collection<Int>?
+    val nums5: Collection<Int>?
 )
