@@ -41,6 +41,7 @@ class LotteryServiceImpl(private val lotteryRepository: IssuedLotteryRepository)
         lotteryRepository.save(lottery)
     }
 
+    // 저장된 복권 중 해당 회차의 당첨 정보 불러오기
     fun getWonLotteryInfo(drwNo: Int): List<WonLotteryNumbersWithRankDto>? {
 
         val wonLotteryInfo = getLotteryInfoByRound(drwNo)
@@ -110,13 +111,41 @@ class LotteryServiceImpl(private val lotteryRepository: IssuedLotteryRepository)
         return null
     }
 
+    // 복권 번호 추첨(다다)
+    fun drawNumbers(){
 
+        var collectedNumbers = mutableListOf<Int>()
+
+        val lastRound = getLastRound()
+
+        for(i in 1..10){
+            collectedNumbers.addAll(getOnlyWonLotteryNumbers(i))
+        }
+
+
+    }
+
+    // 해당 회차 정보에서 당첨숫자들만 뽑아서 리턴
+    fun getOnlyWonLotteryNumbers(round: Int): List<Int>{
+        val wonLotteryInfo = getLotteryInfoByRound(round)
+
+        return listOf(
+            wonLotteryInfo.drwtNo1,
+            wonLotteryInfo.drwtNo2,
+            wonLotteryInfo.drwtNo3,
+            wonLotteryInfo.drwtNo4,
+            wonLotteryInfo.drwtNo5,
+            wonLotteryInfo.drwtNo6)
+    }
+
+    // 입력 회차의 당첨 정보 불러오기
     fun getLotteryInfoByRound(round: Int): LotteryInfoDto {
         var lottoUrl = "https://www.dhlottery.co.kr/common.do?method=getLottoNumber&drwNo=$round"
         val requestInfo = URL(lottoUrl).readText()
         return jacksonObjectMapper().readValue(requestInfo, LotteryInfoDto::class.java)
     }
 
+    // 마지막 회차 불러오기
     fun getLastRound(): Int{
         var url = "https://m.dhlottery.co.kr/gameResult.do?method=byWin"
         val doc = Jsoup.connect(url).get()
