@@ -118,10 +118,45 @@ class LotteryServiceImpl(private val lotteryRepository: IssuedLotteryRepository)
 
         val lastRound = getLastRound()
 
-        for(i in 1..10){
-            collectedNumbers.addAll(getOnlyWonLotteryNumbers(i))
+        for(i in 0..9){
+            collectedNumbers.addAll(getOnlyWonLotteryNumbers(lastRound + i))
         }
 
+        var sortedNumbers = collectedNumbers.sorted()
+
+        println("sortedNumbers : $sortedNumbers")
+
+        var numMap = mutableMapOf<Int, Int>()
+
+        var sortedSize: Int
+
+        while(true){
+
+            sortedSize = sortedNumbers.size
+
+            if(sortedSize == 0){
+                break
+            }else{
+                var size = 0
+                for(num in sortedNumbers){
+                    if(num == sortedNumbers[0]){
+                        size++
+                    }else{
+                        continue
+                    }
+                }
+
+                numMap.put(sortedNumbers[0], size)
+
+                sortedNumbers = sortedNumbers.drop(size)
+                println("처리중 : $sortedNumbers")
+                println("sortedSize : $sortedSize")
+                println("numMap : $numMap")
+            }
+
+        }
+
+        println("lastNumMap : $numMap")
 
     }
 
