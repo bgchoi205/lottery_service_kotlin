@@ -112,19 +112,17 @@ class LotteryServiceImpl(private val lotteryRepository: IssuedLotteryRepository)
     }
 
     // 복권 번호 추첨(다다)
-    fun drawNumbers(){
+    fun drawNumbers(): List<Int> {
 
         var collectedNumbers = mutableListOf<Int>()
 
         val lastRound = getLastRound()
 
-        for(i in 0..9){
-            collectedNumbers.addAll(getOnlyWonLotteryNumbers(lastRound + i))
+        for(i in 0..20){
+            collectedNumbers.addAll(getOnlyWonLotteryNumbers(lastRound - i))
         }
 
         var sortedNumbers = collectedNumbers.sorted()
-
-        println("sortedNumbers : $sortedNumbers")
 
         var numMap = mutableMapOf<Int, Int>()
 
@@ -137,27 +135,29 @@ class LotteryServiceImpl(private val lotteryRepository: IssuedLotteryRepository)
             if(sortedSize == 0){
                 break
             }else{
-                var size = 0
+                var check = 0
                 for(num in sortedNumbers){
                     if(num == sortedNumbers[0]){
-                        size++
+                        check++
                     }else{
                         continue
                     }
                 }
-
-                numMap.put(sortedNumbers[0], size)
-
-                sortedNumbers = sortedNumbers.drop(size)
-                println("처리중 : $sortedNumbers")
-                println("sortedSize : $sortedSize")
-                println("numMap : $numMap")
+                numMap.put(sortedNumbers[0], check)
+                sortedNumbers = sortedNumbers.drop(check)
             }
 
         }
 
-        println("lastNumMap : $numMap")
+        var sortedNumMap = numMap.toList().sortedByDescending { it.second }
 
+        var newNumbers = mutableListOf<Int>()
+
+        for(i in 0..5){
+            newNumbers.add(sortedNumMap[i].first)
+        }
+
+        return newNumbers.sorted()
     }
 
     // 해당 회차 정보에서 당첨숫자들만 뽑아서 리턴
