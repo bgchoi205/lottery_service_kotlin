@@ -12,8 +12,9 @@ class LotteryController(private val lotteryService: LotteryServiceImpl) {
     fun showIndex():String{
         val round = lotteryService.getLastRound()
         val newNumbers = lotteryService.drawNumbers()
+        val newNumbersByRandom = lotteryService.drawNumbersByRandom()
 
-        return "최신 회차 : $round \r\n\t 최근 20회 중 많이 나온 번호 : $newNumbers"
+        return "최신 회차 : $round // 최근 30회 중 많이 나온 번호 : $newNumbers // 랜덤 번호 : $newNumbersByRandom"
     }
 
     // 회차 입력에 따라 당첨 번호 가져오기

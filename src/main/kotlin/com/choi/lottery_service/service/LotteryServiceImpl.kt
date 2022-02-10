@@ -111,6 +111,27 @@ class LotteryServiceImpl(private val lotteryRepository: IssuedLotteryRepository)
         return null
     }
 
+    // 복권 번호 추첨(랜덤)
+    fun drawNumbersByRandom(): List<Int>{
+        val range = (1..45)
+
+        val randomNumbers = mutableListOf<Int>()
+
+        while(true){
+            if(randomNumbers.size == 6){
+                break
+            }
+
+            var random = range.random()
+
+            if(!randomNumbers.contains(random)){
+                randomNumbers.add(random)
+            }
+        }
+
+        return randomNumbers
+    }
+
     // 복권 번호 추첨(다다)
     fun drawNumbers(): List<Int> {
 
@@ -118,7 +139,7 @@ class LotteryServiceImpl(private val lotteryRepository: IssuedLotteryRepository)
 
         val lastRound = getLastRound()
 
-        for(i in 0..20){
+        for(i in 0..30){
             collectedNumbers.addAll(getOnlyWonLotteryNumbers(lastRound - i))
         }
 
