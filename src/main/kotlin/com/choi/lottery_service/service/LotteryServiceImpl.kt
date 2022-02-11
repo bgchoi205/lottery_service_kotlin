@@ -129,7 +129,7 @@ class LotteryServiceImpl(private val lotteryRepository: IssuedLotteryRepository)
             }
         }
 
-        return randomNumbers
+        return randomNumbers.sorted()
     }
 
     // 복권 번호 추첨(다다)
@@ -139,7 +139,9 @@ class LotteryServiceImpl(private val lotteryRepository: IssuedLotteryRepository)
 
         val lastRound = getLastRound()
 
-        for(i in 0..30){
+        val range = (10..200)
+
+        for(i in 0..range.random()){
             collectedNumbers.addAll(getOnlyWonLotteryNumbers(lastRound - i))
         }
 
