@@ -29,6 +29,12 @@ class LotteryController(private val lotteryService: LotteryServiceImpl) {
         lotteryService.save(lotterySaveDto)
     }
 
+    @GetMapping("/issue/at")
+    fun autoIssue():RespDto{
+        val savedLotteryNumbers = lotteryService.issueAutoLottery()
+        return RespDto(savedLotteryNumbers)
+    }
+
     // 저장된 복권 중 해당 회차 당첨된 번호들 가져오기
     @GetMapping("/won/{round}")
     fun getWonLotteryTickets(@PathVariable round: Int): RespDto? {

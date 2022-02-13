@@ -41,6 +41,22 @@ class LotteryServiceImpl(private val lotteryRepository: IssuedLotteryRepository)
         lotteryRepository.save(lottery)
     }
 
+    @Transactional
+    fun issueAutoLottery(): LotterySaveDto{
+
+        val numbers1 = drawNumbers()
+        val numbers2 = drawNumbers()
+        val numbers3 = drawNumbers()
+        val numbers4 = drawNumbersByRandom()
+        val numbers5 = drawNumbersByRandom()
+
+        val lotterySaveDto = LotterySaveDto(numbers1, numbers2, numbers3, numbers4, numbers5)
+
+        save(lotterySaveDto)
+
+        return lotterySaveDto
+    }
+
     // 저장된 복권 중 해당 회차의 당첨 정보 불러오기
     fun getWonLotteryInfo(drwNo: Int): List<WonLotteryNumbersWithRankDto>? {
 
