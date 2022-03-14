@@ -39,6 +39,9 @@ dependencies {
 	implementation("org.jsoup:jsoup:1.14.3")
 	implementation("org.jetbrains.kotlin:kotlin-allopen:1.6.10")
 	implementation("org.springframework.boot:spring-boot-starter-test")
+	implementation("org.springframework.boot:spring-boot-starter-thymeleaf")
+	implementation("nz.net.ultraq.thymeleaf:thymeleaf-layout-dialect")
+
 }
 
 tasks.withType<KotlinCompile> {

@@ -4,12 +4,18 @@ import com.choi.lottery_service.dto.LotterySaveDto
 import com.choi.lottery_service.global.response.RespDto
 import com.choi.lottery_service.service.LotteryServiceImpl
 import org.springframework.web.bind.annotation.*
+import org.springframework.web.servlet.ModelAndView
 
 @RestController
 class LotteryController(private val lotteryService: LotteryServiceImpl) {
 
     @GetMapping
-    fun showIndex():String{
+    fun showIndex(): ModelAndView {
+        return ModelAndView("/index")
+    }
+
+    @GetMapping("/getInfo")
+    fun getNewLotteryNumbers():String{
         val round = lotteryService.getLastRound()
         val newNumbers = lotteryService.drawNumbers()
         val newNumbersByRandom = lotteryService.drawNumbersByRandom()

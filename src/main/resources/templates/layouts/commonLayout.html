@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+    <meta charset="UTF-8">
+    <title>commonLayout</title>
+
+    <!-- 제이쿼리 -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+    <!-- 반응형 메타태그 -->
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+
+    <!-- 테일윈드 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css">
+</head>
+<body>
+    <div class="min-h-screen">
+        <!-- header -->
+        <header th:replace="fragments/header::headerFragment"></header>
+
+        <!-- body -->
+        <div layout:fragment="content"></div>
+
+    </div>
+</body>
+</html>
